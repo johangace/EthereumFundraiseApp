@@ -1,0 +1,5 @@
+static =>  defines a class function. does not require instance of a class
+
+
+!truthy => false
+!!truthy=> true
