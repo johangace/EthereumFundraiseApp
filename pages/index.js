@@ -3,8 +3,10 @@ import factory from '../ethereum/factory'
 import { Card, Button } from 'semantic-ui-react'
 import Layout from './components/Layout'
 import { Link } from '../routes'
+import { json } from 'body-parser'
+import { fetchQuery, postData } from './utils'
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const campaigns = await factory.methods.getDeployedCampaigns().call()
 
   if (!campaigns) {
@@ -13,12 +15,16 @@ export async function getStaticProps(context) {
     }
   }
 
+  const campaignItems = await fetchQuery('items')
+
+  // console.log(campaignItems)
   return {
     // will be passed to the page component as props
-    props: { campaigns },
+    props: {
+      campaigns,
+      campaignItems: campaignItems,
+    },
   }
-  // - At most once every second
-  //, revalidate: 1, // In seconds
 }
 
 export default class CampaignIndex extends Component {
@@ -42,13 +48,17 @@ export default class CampaignIndex extends Component {
       />
     )
   }
+
   render() {
-    console.log(this.props)
     return (
       <Layout>
         {' '}
         <div>
           <h3> Open Campaigns</h3>
+          {/* {this.props.campaignItems.map((i) => {
+            return i.description
+          })} */}
+          {/* {this.props.Data} */}
 
           <Link route="/campaigns/new">
             <a>

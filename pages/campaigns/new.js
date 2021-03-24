@@ -4,6 +4,7 @@ import { Form, Button, Input, Message } from 'semantic-ui-react'
 import factory from '../../ethereum/factory'
 import web3 from '../../ethereum/web3'
 import { Router } from '../../routes'
+import { fetchQuery, postData } from '../utils'
 
 export default class CampaignNew extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class CampaignNew extends Component {
       loading: false,
       successMessage: '',
       loadingMessage: '',
+      description: '',
     }
   }
 
@@ -28,6 +30,11 @@ export default class CampaignNew extends Component {
     })
     try {
       const accounts = await web3.eth.getAccounts()
+      await postData({
+        id: accounts[0],
+        description: this.state.description,
+      })
+
       await factory.methods
         .createCampaign(this.state.minimumContribution)
         .send({
@@ -63,6 +70,17 @@ export default class CampaignNew extends Component {
               value={this.state.minimumContribution}
               onChange={(event) =>
                 this.setState({ minimumContribution: event.target.value })
+              }
+            />
+          </Form.Field>
+
+          <Form.Field>
+            {' '}
+            <label> Description</label>
+            <Input
+              value={this.state.description}
+              onChange={(event) =>
+                this.setState({ description: event.target.value })
               }
             />
           </Form.Field>
