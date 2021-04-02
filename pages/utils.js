@@ -1,5 +1,5 @@
 // const baseUrl = process.env.BASE_URL
-const baseUrl = 'https://3k8qtydd9g.execute-api.us-east-1.amazonaws.com/'
+const baseUrl = 'https://3k8qtydd9g.execute-api.us-east-1.amazonaws.com'
 async function fetchQuery(path, params = null) {
   let url
   if (params !== null) {
@@ -23,15 +23,13 @@ async function postData(data = {}) {
     //   'Content-Type': 'application/json',
     //   // 'Content-Type': 'application/x-www-form-urlencoded',
     // },
+    statusCode: 200,
     redirect: 'follow', // manual, *follow, error
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data), // b
   })
-  return response.json() // parses JSON response into native JavaScript objects
+  return response // parses JSON response into native JavaScript objects
 }
 
-// postData('https://example.com/answer', { answer: 42 }).then((data) => {
-//   console.log(data) // JSON data parsed by `data.json()` call
-// })
 
 export { baseUrl, fetchQuery, postData }

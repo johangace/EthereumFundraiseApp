@@ -30,11 +30,17 @@ export default class CampaignNew extends Component {
     })
     try {
       const accounts = await web3.eth.getAccounts()
+      // await postData({
+      //   id: accounts[0],
+      //   description: this.state.description,
+      // })
+
       await postData({
         id: accounts[0],
         description: this.state.description,
-      })
-
+        NftAddress: this.state.NftAddress,
+        NftId: this.state.NftId
+      });
       await factory.methods
         .createCampaign(this.state.minimumContribution)
         .send({
@@ -81,6 +87,30 @@ export default class CampaignNew extends Component {
               value={this.state.description}
               onChange={(event) =>
                 this.setState({ description: event.target.value })
+              }
+            />
+          </Form.Field>
+
+NFT Info
+
+          <Form.Field>
+            {' '}
+            <label> NFT Token Address</label>
+            <Input
+              value={this.state.NftAddress}
+              onChange={(event) =>
+                this.setState({ NftAddress: event.target.value })
+              }
+            />
+          </Form.Field>
+
+          <Form.Field>
+            {' '}
+            <label> NFT Token ID</label>
+            <Input
+              value={this.state.NftId}
+              onChange={(event) =>
+                this.setState({ NftId: event.target.value })
               }
             />
           </Form.Field>

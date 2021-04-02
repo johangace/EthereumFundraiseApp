@@ -1,16 +1,20 @@
 import Web3 from 'web3'
+import { OpenSeaPort, Network } from "opensea-js";
 
 //1
 
 let web3
+export let openSeaportGate
 //check if we running code on server or browser
 if (
   typeof window !== 'undefined' &&
-  window.web3 !== 'undefined' &&
-  window.ethereum.isMetaMask
+  window.web3 !== 'undefined' 
+  // window.ethereum.isMetaMask
 ) {
   //we in browser with metamask
   web3 = new Web3(window.ethereum)
+  openSeaportGate= new OpenSeaPort(window.ethereum);
+
   console.log('Metamask? ' + window.ethereum.isMetaMask)
   //   window.ethereum.enable()
 } else {
@@ -22,6 +26,7 @@ if (
     'https://rinkeby.infura.io/v3/c7eafb639f494905b254800f3721cd1f',
   )
   web3 = new Web3(provider)
+  openSeaportGate= new OpenSeaPort(provider);
 }
 
 export default web3
