@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "dev": "node server.js"
+    "dev": "npm run dev"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "mocha": "^8.3.2",
     "next": "^10.0.9",
     "next-routes": "^1.4.2",
+    "opensea-js": "^1.1.11",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "semantic-ui-css": "^2.4.1",
